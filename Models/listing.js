@@ -19,7 +19,6 @@ const listingSchema = new Schema({
     },
     price: {
         type: Number,
-        required: true,
         default: 15000,
     },
     location: {
