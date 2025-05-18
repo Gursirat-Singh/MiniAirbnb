@@ -1,0 +1,11 @@
+<body>
+<h3>All Listings</h3>
+    <form action="/listing/new" method="get">
+        <button>Create New Listing</button>
+    </form>
+    <ul> 
+        <%for(let list of Listings){%>
+            <li><a href="/listings/<%=list._id%>"><%= list.title%></li></a>    
+        <%}%>
+    </ul>
+</body>
