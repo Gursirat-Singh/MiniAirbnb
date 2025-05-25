@@ -41,7 +41,7 @@
           name="listing[image][url]"
           class="form-control"
           id="img"
-          value="<%=listing.image.url%>"
+          value="<%= listing.image?.url %>"
           required
         />
         <div class="valid-feedback">Image Set</div>
@@ -51,7 +51,6 @@
         <div class="mb-3 col-md-4">
           <label for="price" class="form-label">Price</label>
           <input
-            
             name="listing[price]"
             value="<%=listing.price%>"
             class="form-control"

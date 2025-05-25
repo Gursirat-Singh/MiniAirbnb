@@ -2,12 +2,13 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const path = require("path");
-const Listing = require("./Models/listing"); // 
+const Listing = require("./Models/listing");
+const review = require("./Models/reviews.js");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const wrapAsync = require("./utils/wrapAsync.js");
 const CustomError = require("./utils/ExpressError.js");
-const joiSchema = require("./schema.js");
+const { listingSchema, reviewSchema } = require("./schema.js");
 
 
 app.set("view engine", "ejs");
@@ -53,9 +54,19 @@ app.get("/testListing", async (req, res) => {
 });
 
 const validateListing = (req, res, next) => {
-  let { error } = joiSchema.validate(req.body);
+  let { error } = listingSchema.validate(req.body);
   if (error) {
-    let errMsg = error.details.map((el)=>el.message).join(",");
+    let errMsg = error.details.map((el) => el.message).join(",");
+    throw new CustomError(400, errMsg);
+  }
+  else {
+    next();
+  }
+};
+const validateReview = (req, res, next) => {
+  let { error } = reviewSchema.validate(req.body);
+  if (error) {
+    let errMsg = error.details.map((el) => el.message).join(",");
     throw new CustomError(400, errMsg);
   }
   else {
@@ -82,7 +93,7 @@ app.get(
     if (!mongoose.Types.ObjectId.isValid(id)) {
       throw new CustomError(400, "Invalid Listing ID");
     }
-    const listing = await Listing.findById(id);
+    const listing = await Listing.findById(id).populate("reviews");
     if (!listing) {
       throw new CustomError(404, "Listing Not Found");
     }
@@ -122,17 +133,17 @@ app.put("/listings/:id", validateListing, wrapAsync(async (req, res) => {
   if (!mongoose.Types.ObjectId.isValid(id)) {
     throw new CustomError(400, "Invalid Listing ID");
   }
-  if (!listing) {
-    throw new CustomError(400, "Listing Not Found");
-  }
   const listing = await Listing.findByIdAndUpdate(id, {
     ...req.body.listing,
   });
+  if (!listing) {
+    throw new CustomError(400, "Listing Not Found");
+  }
   res.redirect(`/listings/${id}`);
 }));
 
 // Delete Route
-app.delete("/listings/:id", validateListing, async (req, res) => {
+app.delete("/listings/:id",  async (req, res) => {
   const { id } = req.params;
   if (!mongoose.Types.ObjectId.isValid(id)) {
     throw new CustomError(400, "Invalid Listing ID");
@@ -145,11 +156,31 @@ app.delete("/listings/:id", validateListing, async (req, res) => {
   res.redirect("/listings");
 });
 
+
+//Adding Reviews 
+app.post("/listing/:id/reviews", validateReview, wrapAsync(async (req, res) => {
+  let listing = await Listing.findById(req.params.id);
+  let newReview = new review(req.body.review)
+  listing.reviews.push(newReview);
+  await newReview.save();
+  await listing.save();
+  res.redirect(`/listings/${listing._id}`);
+}));
+
+//Deleting a Review
+app.delete("/listings/:id/reviews/:reviewId", wrapAsync(async (req, res) => {
+  let { id, reviewId } = req.params;
+  await Listing.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });
+  await review.findById(reviewId);
+  res.redirect(`/listings/${id}`);
+}));
+
+
+//All Error Handler
 app.all(/.*/, (req, res) => {
   const message = "Page not Found"
   res.status(404).render("listings/error.ejs", { message });
 });
-
 
 // Global Error Handler
 app.use((err, req, res, next) => {
