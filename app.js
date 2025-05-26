@@ -8,6 +8,8 @@ const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const listingRoute = require("./routes/listingroute.js");
 const reviewRoute = require("./routes/reviewRoute.js");
+const session = require("express-session");
+const flash = require("connect-flash");
 
 
 app.set("view engine", "ejs");
@@ -27,10 +29,6 @@ main()
   .then(() => console.log("Database Connection Successful"))
   .catch((err) => console.log("Error Occurred, Please Check the Issue"));
 
-// Root Route
-app.get("/", (req, res) => {
-  res.send("Welcome to My StaySira");
-});
 
 // Server Start
 app.listen(8080, () => {
@@ -52,6 +50,32 @@ app.get("/testListing", async (req, res) => {
   res.send("Test Successful");
 });
 
+//Sessions
+const sessionOptions = {
+  secret: "BasicSecret",
+  resave:false,
+  saveUninitialized:true,
+  cookie:{
+    expires:Date.now() + 7 * 24 * 60 * 1000,
+    maxAge: 7 * 24 * 60 * 1000,
+  },
+  httpOnly:true,
+};
+
+// Root Route
+app.get("/", (req, res) => {
+  res.send("Welcome to My StaySira");
+});
+
+
+app.use(session(sessionOptions));
+app.use(flash());
+
+app.use((req,res,next)=>{
+  res.locals.success = req.flash("success");
+  res.locals.error = req.flash("error");
+  next();
+});
 
 app.use("/listings", listingRoute);
 app.use("/listings/:id/reviews", reviewRoute);

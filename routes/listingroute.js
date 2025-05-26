@@ -40,7 +40,8 @@ router.get(
     }
     const listing = await Listing.findById(id).populate("reviews");
     if (!listing) {
-      throw new CustomError(404, "Listing Not Found");
+      req.flash("error","Listing Not Found!");
+      return res.redirect("/listings");
     }
     res.render("listings/show.ejs", { listing });
   })
@@ -55,6 +56,7 @@ router.post(
     }
     const newListing = new Listing(req.body.listing);
     await newListing.save();
+    req.flash("success","New Listing Created Successfully!");
     res.redirect("/listings");
   })
 );
@@ -66,9 +68,10 @@ router.get("/:id/edit", validateListing, async (req, res) => {
     throw new CustomError(400, "Invalid Listing ID");
   }
   const listing = await Listing.findById(id);
-  if (!listing) {
-    throw new CustomError(400, "Listing Not Found");
-  }
+   if (!listing) {
+      req.flash("error","Listing Not Found!");
+      return res.redirect("/listings");
+    }
   res.render("listings/edit.ejs", { listing });
 });
 
@@ -84,6 +87,7 @@ router.put("/:id", validateListing, wrapAsync(async (req, res) => {
   if (!listing) {
     throw new CustomError(400, "Listing Not Found");
   }
+  req.flash("success","Listing Updated Successfully!");
   res.redirect(`/listings/${id}`);
 }));
 
@@ -97,7 +101,7 @@ router.delete("/:id", async (req, res) => {
   if (!dellisting) {
     throw new CustomError(400, "Listing Not Found");
   }
-  console.log(dellisting);
+  req.flash("success","Listing Deleted Successfully!");
   res.redirect("/listings");
 });
 
