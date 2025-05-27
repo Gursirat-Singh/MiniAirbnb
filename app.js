@@ -8,8 +8,12 @@ const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const listingRoute = require("./routes/listingroute.js");
 const reviewRoute = require("./routes/reviewRoute.js");
+const userRoute = require("./routes/userroute.js");
 const session = require("express-session");
 const flash = require("connect-flash");
+const passport = require("passport");
+const LocalStrategy = require("passport-local");
+const User = require("./Models/user.js");
 
 
 app.set("view engine", "ejs");
@@ -71,6 +75,25 @@ app.get("/", (req, res) => {
 app.use(session(sessionOptions));
 app.use(flash());
 
+//Password Authentication
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+//Password test demo
+// app.get("/demouser",async(req,res)=>{
+//   let fakeUser = new User({
+//     email:"Student@gmail.com",
+//     username:"Demo Student"
+//   });
+//   let registeredUser = await User.register(fakeUser,"helloWorld");
+//   res.send(registeredUser);
+// })
+
+
 app.use((req,res,next)=>{
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
@@ -79,6 +102,7 @@ app.use((req,res,next)=>{
 
 app.use("/listings", listingRoute);
 app.use("/listings/:id/reviews", reviewRoute);
+app.use("/", userRoute);
 
 
 //All Error Handler
