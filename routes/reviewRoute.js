@@ -5,23 +5,10 @@ const Review = require("../Models/reviews.js");
 const Listing = require("../Models/listing.js");
 const wrapAsync = require("../utils/wrapAsync.js");
 const CustomError = require("../utils/ExpressError.js");
-const { reviewSchema } = require("../schema.js");
-
-
-const validateReview = (req, res, next) => {
-    let { error } = reviewSchema.validate(req.body);
-    if (error) {
-        let errMsg = error.details.map((el) => el.message).join(",");
-        throw new CustomError(400, errMsg);
-    }
-    else {
-        next();
-    }
-};
-
+const { validateReview, isLoggedIn , isAuthorReview} = require("../middleware.js");
 
 //Adding Reviews 
-router.post("/", validateReview, wrapAsync(async (req, res) => {
+router.post("/", isLoggedIn, validateReview, wrapAsync(async (req, res) => {
     const { id } = req.params;
     const listing = await Listing.findById(id);
 
@@ -30,19 +17,20 @@ router.post("/", validateReview, wrapAsync(async (req, res) => {
     }
 
     const newReview = new Review(req.body.review);
+    newReview.author = req.user._id;
     listing.reviews.push(newReview);
     await newReview.save();
     await listing.save();
-    req.flash("success","New Review Created Successfully!");
+    req.flash("success", "New Review Created Successfully!");
     res.redirect(`/listings/${listing._id}`);
 }));
 
 //Deleting a Review
-router.delete("/:reviewId", wrapAsync(async (req, res) => {
+router.delete("/:reviewId", isLoggedIn,isAuthorReview, wrapAsync(async (req, res) => {
     let { id, reviewId } = req.params;
     await Listing.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });
     await Review.findById(reviewId);
-    req.flash("success","Review Deleted Successfully!");
+    req.flash("success", "Review Deleted Successfully!");
     res.redirect(`/listings/${id}`);
 }));
 

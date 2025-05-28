@@ -62,8 +62,8 @@ const sessionOptions = {
   cookie:{
     expires:Date.now() + 7 * 24 * 60 * 1000,
     maxAge: 7 * 24 * 60 * 1000,
+    httpOnly:true,
   },
-  httpOnly:true,
 };
 
 // Root Route
@@ -93,10 +93,11 @@ passport.deserializeUser(User.deserializeUser());
 //   res.send(registeredUser);
 // })
 
-
+//Locals
 app.use((req,res,next)=>{
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
+  res.locals.currentUser = req.user;
   next();
 });
 

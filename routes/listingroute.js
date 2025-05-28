@@ -4,20 +4,7 @@ const mongoose = require("mongoose");
 const Listing = require("../Models/listing.js");
 const wrapAsync = require("../utils/wrapAsync.js");
 const CustomError = require("../utils/ExpressError.js");
-const { listingSchema } = require("../schema.js");
-
-
-
-const validateListing = (req, res, next) => {
-  let { error } = listingSchema.validate(req.body);
-  if (error) {
-    let errMsg = error.details.map((el) => el.message).join(",");
-    throw new CustomError(400, errMsg);
-  }
-  else {
-    next();
-  }
-};
+const { isLoggedIn, isOwner, validateListing } = require("../middleware.js");
 
 //Index Route
 router.get("/", validateListing, async (req, res) => {
@@ -26,7 +13,7 @@ router.get("/", validateListing, async (req, res) => {
 });
 
 // New Route
-router.get("/new", (req, res) => {
+router.get("/new", isLoggedIn, (req, res) => {
   res.render("listings/new.ejs");
 });
 
@@ -38,61 +25,62 @@ router.get(
     if (!mongoose.Types.ObjectId.isValid(id)) {
       throw new CustomError(400, "Invalid Listing ID");
     }
-    const listing = await Listing.findById(id).populate("reviews");
+    const listing = await Listing.findById(id).populate({ path: "reviews", populate: { path: "author" } }).populate("owner");
     if (!listing) {
-      req.flash("error","Listing Not Found!");
+      req.flash("error", "Listing Not Found!");
       return res.redirect("/listings");
     }
+    console.log(listing);
     res.render("listings/show.ejs", { listing });
   })
 );
 
 // Create Route
 router.post(
-  "/", validateListing,
+  "/", isLoggedIn, validateListing,
   wrapAsync(async (req, res, next) => {
     if (!req.body.listing) {
       throw new CustomError(400, "Data Incomplete");
     }
     const newListing = new Listing(req.body.listing);
+    newListing.owner = req.user._id;
     await newListing.save();
-    req.flash("success","New Listing Created Successfully!");
+    req.flash("success", "New Listing Created Successfully!");
     res.redirect("/listings");
   })
 );
 
 // Edit Route
-router.get("/:id/edit", validateListing, async (req, res) => {
+router.get("/:id/edit", validateListing, isLoggedIn, isOwner, async (req, res) => {
   const { id } = req.params;
   if (!mongoose.Types.ObjectId.isValid(id)) {
     throw new CustomError(400, "Invalid Listing ID");
   }
   const listing = await Listing.findById(id);
-   if (!listing) {
-      req.flash("error","Listing Not Found!");
-      return res.redirect("/listings");
-    }
+  if (!listing) {
+    req.flash("error", "Listing Not Found!");
+    return res.redirect("/listings");
+  }
   res.render("listings/edit.ejs", { listing });
 });
 
 // Update Route
-router.put("/:id", validateListing, wrapAsync(async (req, res) => {
+router.put("/:id", validateListing, isLoggedIn, isOwner, wrapAsync(async (req, res) => {
   const { id } = req.params;
   if (!mongoose.Types.ObjectId.isValid(id)) {
     throw new CustomError(400, "Invalid Listing ID");
   }
-  const listing = await Listing.findByIdAndUpdate(id, {
-    ...req.body.listing,
-  });
+  let listing = await Listing.findById(id);
   if (!listing) {
     throw new CustomError(400, "Listing Not Found");
   }
-  req.flash("success","Listing Updated Successfully!");
+  await Listing.findByIdAndUpdate(id, { ...req.body.listing });
+  req.flash("success", "Listing Updated Successfully!");
   res.redirect(`/listings/${id}`);
 }));
 
 // Delete Route
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", isLoggedIn, isOwner, async (req, res) => {
   const { id } = req.params;
   if (!mongoose.Types.ObjectId.isValid(id)) {
     throw new CustomError(400, "Invalid Listing ID");
@@ -101,7 +89,7 @@ router.delete("/:id", async (req, res) => {
   if (!dellisting) {
     throw new CustomError(400, "Listing Not Found");
   }
-  req.flash("success","Listing Deleted Successfully!");
+  req.flash("success", "Listing Deleted Successfully!");
   res.redirect("/listings");
 });
 
