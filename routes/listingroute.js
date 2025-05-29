@@ -6,6 +6,14 @@ const wrapAsync = require("../utils/wrapAsync.js");
 const CustomError = require("../utils/ExpressError.js");
 const { isLoggedIn, isOwner, validateListing } = require("../middleware.js");
 const listingController = require("../controllers/listingController.js");
+const multer = require("multer");
+const storage = require("../cloudConfig.js");
+const upload = multer({
+  storage,
+  limits: {
+    fileSize: 1024 * 1024 * 5 
+  }
+});
 
 router.route("/")
   // Index Route 
@@ -13,8 +21,9 @@ router.route("/")
   // Create Route
   .post(
     isLoggedIn,
+    upload.single('listing[image]'),
     validateListing,
-    wrapAsync(listingController.createListing)
+    wrapAsync(listingController.createListing),
   );
 
 router.route("/new")
@@ -28,6 +37,7 @@ router.route("/:id")
   // Update Route
   .put(
     isLoggedIn,
+    upload.single('listing[image]'),
     validateListing,
     isOwner,
     wrapAsync(listingController.updateListing)

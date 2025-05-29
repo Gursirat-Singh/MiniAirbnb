@@ -30,15 +30,29 @@ module.exports.showListing = async (req, res, next) => {
 
 //create Listing
 module.exports.createListing = async (req, res, next) => {
-    if (!req.body.listing) {
-        throw new CustomError(400, "Data Incomplete");
+    try {
+        if (!req.file) {
+            throw new CustomError(400, "Please upload an image");
+        }
+
+        const newListing = new Listing(req.body.listing);
+        newListing.owner = req.user._id;
+        newListing.image = {
+            url: req.file.path,
+            filename: req.file.filename
+        };
+
+        await newListing.save();
+        req.flash("success", "New Listing Created Successfully!");
+        res.redirect("/listings");
+    } catch (err) {
+        // Handle timeout or connection errors
+        console.error("Upload Error:", err);
+        req.flash("error", "Error uploading image. Please try again.");
+        return res.redirect("/listings/new");
     }
-    const newListing = new Listing(req.body.listing);
-    newListing.owner = req.user._id;
-    await newListing.save();
-    req.flash("success", "New Listing Created Successfully!");
-    res.redirect("/listings");
-}
+};
+
 
 //Edit Listing Form
 module.exports.editListingForm = async (req, res) => {
@@ -51,22 +65,42 @@ module.exports.editListingForm = async (req, res) => {
         req.flash("error", "Listing Not Found!");
         return res.redirect("/listings");
     }
-    res.render("listings/edit.ejs", { listing });
+    let originalImage = listing.image.url;
+    originalImage = originalImage.replace("/upload", "/upload/h_150,w_150");
+    res.render("listings/edit.ejs", { listing, originalImage });
 }
+
 
 //Update Listing
 module.exports.updateListing = async (req, res) => {
-    const { id } = req.params;
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        throw new CustomError(400, "Invalid Listing ID");
+    try {
+        const { id } = req.params;
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            throw new CustomError(400, "Invalid Listing ID");
+        }
+
+        let listing = await Listing.findById(id);
+        if (!listing) {
+            throw new CustomError(400, "Listing Not Found");
+        }
+
+        const updatedListing = await Listing.findByIdAndUpdate(id, { ...req.body.listing });
+
+        if (req.file) {
+            updatedListing.image = {
+                url: req.file.path,
+                filename: req.file.filename
+            };
+            await updatedListing.save();
+        }
+
+        req.flash("success", "Listing Updated Successfully!");
+        res.redirect(`/listings/${id}`);
+    } catch (err) {
+        console.error("Update Error:", err);
+        req.flash("error", err.message || "Error updating listing");
+        return res.redirect(`/listings/${req.params.id}/edit`);
     }
-    let listing = await Listing.findById(id);
-    if (!listing) {
-        throw new CustomError(400, "Listing Not Found");
-    }
-    await Listing.findByIdAndUpdate(id, { ...req.body.listing });
-    req.flash("success", "Listing Updated Successfully!");
-    res.redirect(`/listings/${id}`);
 }
 
 //Destroy Listing

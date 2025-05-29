@@ -1,4 +1,4 @@
-p<% layout('/layouts/boilerplate') -%>
+<% layout('/layouts/boilerplate') -%>
 <div class="row">
   <div class="col-8 offset-2 mb-5 mt-3">
     <div class="card border-0">
@@ -10,6 +10,7 @@ p<% layout('/layouts/boilerplate') -%>
           class="card-img-top rounded-4 mb-3"
           style="height: 30vh; object-fit: cover"
         />
+        
         <h2>Owned By: <i><%=listing.owner[0].username%></i></h2>
         <p class="text-secondary my-3"><%=listing.description%></p>
         <h3 class="mb-3">₹<%=listing.price.toLocaleString("en-IN")%></h3>
