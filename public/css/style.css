@@ -118,3 +118,12 @@ body {
     padding: 0.5rem 1.2rem;
     border-radius: 0.5rem;
   }
+
+
+/* #map */
+#map {
+    height: 400px;
+    width: 100%;
+    border-radius: 12px;
+    margin-top: 2rem;
+  }
