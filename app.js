@@ -69,10 +69,10 @@ const sessionOptions = {
   },
 };
 
-// Root Route
-app.get("/", (req, res) => {
-  res.send("Welcome to My StaySira");
-});
+// // Root Route
+// app.get("/", (req, res) => {
+//   res.send("Welcome to My StaySira");
+// });
 
 
 app.use(session(sessionOptions));

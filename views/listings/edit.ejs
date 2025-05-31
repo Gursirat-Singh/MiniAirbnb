@@ -1,7 +1,7 @@
 <% layout('/layouts/boilerplate') -%>
-<div class="row mt-3">
+<div class="row" style="margin-top: 180px">
   <div class="col-8 offset-2">
-    <h3 class="mb-4">Edit Listing</h3>
+    <h3 class="mb-4" style="font-weight: 600; color: #222222">Edit Listing</h3>
     <form
       action="/listings/<%=listing._id%>?_method=put"
       method="post"
@@ -9,25 +9,42 @@
       class="needs-validation"
       enctype="multipart/form-data"
     >
-      <div class="mb-3">
-        <label for="title" class="form-label">Title</label>
+      <div class="mb-4">
+        <label
+          for="title"
+          class="form-label"
+          style="font-weight: 500; color: #222222"
+          >Title</label
+        >
         <input
           type="text"
           name="listing[title]"
           id="title"
           value="<%=listing.title%>"
           class="form-control"
+          style="border-radius: 8px; padding: 12px; border: 1px solid #dddddd"
           required
         />
         <div class="valid-feedback">Title Set</div>
         <div class="invalid-feedback">Please Enter the Title</div>
       </div>
-      <div class="mb-3">
-        <label for="description" class="form-label">Description</label>
+      <div class="mb-4">
+        <label
+          for="description"
+          class="form-label"
+          style="font-weight: 500; color: #222222"
+          >Description</label
+        >
         <textarea
           name="listing[description]"
           class="form-control"
           id="description"
+          style="
+            border-radius: 8px;
+            padding: 12px;
+            min-height: 120px;
+            border: 1px solid #dddddd;
+          "
           required
         >
 <%=listing.description%></textarea
@@ -35,65 +52,133 @@
         <div class="valid-feedback">Description Set</div>
         <div class="invalid-feedback">Please Enter the Description</div>
       </div>
-      <div class="mb-3">
-        <p>Original Image</p>
-        <img src="<%=originalImage%>" alt="Image Preview not available" />
+      <div class="mb-4">
+        <p style="font-weight: 500; color: #222222">Original Image</p>
+        <img
+          src="<%=originalImage%>"
+          alt="Image Preview not available"
+          style="
+            border-radius: 12px;
+            max-width: 100%;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+          "
+        />
       </div>
-      <div class="mb-3">
-        <label for="img" class="form-label">Image</label>
+      <div class="mb-4">
+        <label
+          for="img"
+          class="form-label"
+          style="font-weight: 500; color: #222222"
+          >Image</label
+        >
         <input
           type="file"
           name="listing[image]"
           class="form-control"
           id="img"
+          style="border-radius: 8px; padding: 12px; border: 1px solid #dddddd"
         />
       </div>
       <div class="row">
-        <div class="mb-3 col-md-4">
-          <label for="price" class="form-label">Price</label>
+        <div class="mb-4 col-md-4">
+          <label
+            for="price"
+            class="form-label"
+            style="font-weight: 500; color: #222222"
+            >Price</label
+          >
           <input
             name="listing[price]"
             value="<%=listing.price%>"
             class="form-control"
             id="price"
+            style="border-radius: 8px; padding: 12px; border: 1px solid #dddddd"
             required
           />
           <div class="valid-feedback">Price Set</div>
           <div class="invalid-feedback">Please Enter Valid Price</div>
         </div>
-        <div class="mb-3 col-md-8">
-          <label for="country" class="form-label">Country</label>
+        <div class="mb-4 col-md-8">
+          <label
+            for="country"
+            class="form-label"
+            style="font-weight: 500; color: #222222"
+            >Country</label
+          >
           <input
             type="text"
             name="listing[country]"
             class="form-control"
             value="<%=listing.country%>"
             id="country"
+            style="border-radius: 8px; padding: 12px; border: 1px solid #dddddd"
             required
           />
           <div class="valid-feedback">Country Set</div>
           <div class="invalid-feedback">Please Enter the Country</div>
         </div>
       </div>
-      <div class="mb-3">
-        <label for="location" class="form-label">Location</label>
+      <div class="mb-4">
+        <label
+          for="location"
+          class="form-label"
+          style="font-weight: 500; color: #222222"
+          >Location</label
+        >
         <input
           type="text"
           name="listing[location]"
           class="form-control"
           value="<%=listing.location%>"
           id="location"
+          style="border-radius: 8px; padding: 12px; border: 1px solid #dddddd"
           required
         />
         <div class="valid-feedback">Location Set</div>
         <div class="invalid-feedback">Please Enter the Location</div>
       </div>
-
+      <div class="mb-4">
+        <label
+          for="category"
+          class="form-label"
+          style="font-weight: 500; color: #222222"
+          >Category</label
+        >
+        <select
+          class="form-select"
+          name="listing[category]"
+          id="category"
+          style="border-radius: 8px; padding: 12px; border: 1px solid #dddddd"
+          required
+        >
+          <option value="">Select a category</option>
+          <option value="trending">Trending</option>
+          <option value="rooms">Rooms</option>
+          <option value="iconic cities">Iconic Cities</option>
+          <option value="mountains">Mountains</option>
+          <option value="castles">Castles</option>
+          <option value="amazing pools">Amazing Pools</option>
+          <option value="camping">Camping</option>
+          <option value="farms">Farms</option>
+          <option value="arctic">Arctic</option>
+          <option value="luxury">Luxury</option>
+          <option value="lake houses">Lake Houses</option>
+        </select>
+        <div class="valid-feedback">Category Selected</div>
+        <div class="invalid-feedback">Please Select a Category</div>
+      </div>
       <button
-        class="btn btn-dark mt-3 mb-5"
-        style="background-color: #fe434d; border: none"
+        class="btn btn-dark mt-4 mb-5 w-100"
+        style="
+          background-color: #ff385c;
+          border: none;
+          padding: 12px;
+          border-radius: 8px;
+          font-weight: 500;
+          font-size: 1rem;
+        "
       >
-        Edit Stay
+        Update Listing
       </button>
     </form>
   </div>

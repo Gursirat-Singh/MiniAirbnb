@@ -15,19 +15,35 @@ module.exports.newListingForm = (req, res) => {
 
 //Show Listing
 module.exports.showListing = async (req, res, next) => {
-    const { id } = req.params;
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        throw new CustomError(400, "Invalid Listing ID");
-    }
-    const listing = await Listing.findById(id).populate({ path: "reviews", populate: { path: "author" } }).populate("owner");
-    if (!listing) {
-        req.flash("error", "Listing Not Found!");
-        return res.redirect("/listings");
-    }
-    console.log(listing);
-    res.render("listings/show.ejs", { listing });
-}
+    try {
+        const { id } = req.params;
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            throw new CustomError(400, "Invalid Listing ID");
+        }
+        const listing = await Listing.findById(id)
+            .populate({
+                path: "owner",
+                populate: {
+                    path: "username"
+                }
+            })
+            .populate({
+                path: "reviews",
+                populate: {
+                    path: "author"
+                }
+            });
+        if (!listing) {
+            req.flash("error", "Listing Not Found!");
+            return res.redirect("/listings");
+        }
 
+        res.render("listings/show.ejs", { listing });
+    } catch (err) {
+        console.error("Show Listing Error:", err);
+        next(err);
+    }
+};
 //create Listing
 module.exports.createListing = async (req, res, next) => {
     try {
@@ -117,3 +133,22 @@ module.exports.destroyListing = async (req, res) => {
     res.redirect("/listings");
 }
 
+module.exports.searchListings = async (req, res) => {
+    try {
+        const { country } = req.query;
+        const listings = await Listing.find({
+            country: { $regex: new RegExp(country, 'i') }
+        });
+
+        if (listings.length === 0) {
+            req.flash("error", "No listings found for this country!");
+            return res.redirect("/listings");
+        }
+
+        res.render("listings/index.ejs", { Listings: listings });
+    } catch (err) {
+        console.error("Search Error:", err);
+        req.flash("error", "Error occurred while searching");
+        res.redirect("/listings");
+    }
+}

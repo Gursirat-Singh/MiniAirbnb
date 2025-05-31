@@ -11,7 +11,7 @@ const storage = require("../cloudConfig.js");
 const upload = multer({
   storage,
   limits: {
-    fileSize: 1024 * 1024 * 5 
+    fileSize: 1024 * 1024 * 5
   }
 });
 
@@ -30,6 +30,10 @@ router.route("/new")
   // New Route
   .get(isLoggedIn, listingController.newListingForm);
 
+router.route("/search")
+  .get(
+    wrapAsync(listingController.searchListings)
+  );
 
 router.route("/:id")
   // Show Route
@@ -56,5 +60,4 @@ router.route("/:id/edit")
     isOwner,
     wrapAsync(listingController.editListingForm)
   );
-
 module.exports = router;

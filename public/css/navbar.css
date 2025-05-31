@@ -1,0 +1,78 @@
+.navbar {
+  position: fixed;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  border-radius: 50px;
+  background-color: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+.navbar.scrolled {
+  top: 0;
+  width: 100%;
+  border-radius: 0;
+  background-color: white;
+  box-shadow: 0 1px 12px rgba(0, 0, 0, 0.08);
+}
+
+.search-form {
+  border: 1px solid #dddddd !important;
+  min-width: 350px;
+  transition: all 0.2s;
+}
+
+.search-form:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+}
+
+.search-input {
+  font-size: 0.9rem;
+  width: 240px;
+}
+
+.search-input:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.search-btn {
+  background: #ff385c;
+  width: 32px;
+  height: 32px;
+  transition: transform 0.2s;
+}
+
+.search-btn:hover {
+  background: #ff385c;
+  transform: scale(1.05);
+}
+
+.search-icon {
+  color: white;
+}
+
+.nav-btn {
+  transition: all 0.2s;
+  color: #222222;
+}
+
+.nav-btn:hover {
+  background-color: #f7f7f7;
+}
+
+.host-btn {
+  font-weight: 500;
+}
+
+.login-btn {
+  background-color: #ff385c;
+  color: white !important;
+}
+
+.login-btn:hover {
+  background-color: #e31c5f;
+}

@@ -33,10 +33,15 @@ module.exports.logInForm = (req, res) => {
     res.render("users/login.ejs")
 }
 
-module.exports.logIn = async (req, res) => {
-    req.flash("success", "Welcome back to SiraStay");
-    let redirectUrl = res.locals.redirectUrl || "/listings"
-    res.redirect(redirectUrl);
+
+module.exports.logIn = async (req, res, next) => {
+    try {
+        req.flash("success", "Welcome back to SiraStay");
+        let redirectUrl = res.locals.redirectUrl || "/listings"
+        res.redirect(redirectUrl);
+    } catch (err) {
+        next(err);
+    }
 }
 
 module.exports.logOut = (req, res, next) => {

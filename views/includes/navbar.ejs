@@ -1,6 +1,9 @@
-<nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
+<nav class="navbar navbar-expand-md bg-white sticky-top py-3">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/"><i class="fa-brands fa-airbnb"></i></a>
+    <a class="navbar-brand text-danger me-5" href="/listings">
+      <i class="fa-brands fa-airbnb fs-3"></i>
+      <span class="ms-1 fw-bold">SiraStay</span>
+    </a>
     <button
       class="navbar-toggler"
       type="button"
@@ -10,17 +13,49 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <a class="nav-link" href="/">Home</a>
-        <a class="nav-link" href="/listings">All Listings</a>
-        <a class="nav-link" href="/listings/new">Add New Listing</a>
+      <div class="navbar-nav flex-grow-1 justify-content-center order-md-1">
+        <form
+          class="search-form mx-3"
+          role="search"
+          action="/listings/search"
+          method="get"
+        >
+          <div class="search-wrapper d-flex align-items-center">
+            <i class="fa-solid fa-location-dot search-icon-location"></i>
+            <input
+              class="form-control border-0 search-input"
+              type="search"
+              placeholder="Where to?"
+              aria-label="Search"
+              name="country"
+              required
+              minlength="2"
+              autocomplete="off"
+            />
+            <button class="search-button" type="submit" title="Search">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+          </div>
+        </form>
       </div>
-      <div class="navbar-nav ms-auto">
+      <div class="navbar-nav order-md-2 gap-2">
+        <a
+          class="nav-link rounded-pill px-3 py-2 nav-btn host-btn"
+          href="/listings/new"
+        >
+          <span>SiraStay your home</span>
+        </a>
         <%if(!currentUser){%>
-        <a class="nav-link" href="/signup">SignUp</a>
-        <a class="nav-link" href="/login">LogIn</a>
+        <a class="nav-link rounded-pill px-3 py-2 nav-btn" href="/signup"
+          ><b>Sign up</b></a
+        >
+        <a class="nav-link rounded-pill px-3 py-2 login-btn" href="/login"
+          ><b>Log in</b></a
+        >
         <%}%> <%if(currentUser){%>
-        <a class="nav-link" href="/logout">LogOut</a>
+        <a class="nav-link rounded-pill px-3 py-2 nav-btn" href="/logout"
+          >Log out</a
+        >
         <%}%>
       </div>
     </div>

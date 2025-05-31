@@ -1,352 +1,641 @@
 const sampleListings = [
   {
-    title: "Cozy Beachfront Cottage",
-    description:
-      "Escape to this charming beachfront cottage for a relaxing getaway. Enjoy stunning ocean views and easy access to the beach.",
-    image: {
-      filename: "listingimage",
-      url: "https://images.unsplash.com/photo-1552733407-5d5c46c3bb3b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHRyYXZlbHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60",
+    "title": "Beautiful Stay in Santorini",
+    "description": "Enjoy a relaxing vacation in the heart of Santorini, Greece. Perfect for your next getaway.",
+    "image": {
+      "filename": "listingimage",
+      "url": "https://images.pexels.com/photos/163864/santorini-oia-greece-travel-163864.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
     },
-    price: 1500,
-    location: "Malibu",
-    country: "United States",
+    "price": 600,
+    "location": "Santorini",
+    "country": "Greece",
+    "category": "trending"
   },
   {
-    title: "Modern Loft in Downtown",
-    description:
-      "Stay in the heart of the city in this stylish loft apartment. Perfect for urban explorers!",
-    image: {
-      filename: "listingimage",
-      url: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fHRyYXZlbHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60",
+    "title": "Beautiful Stay in Kyoto",
+    "description": "Enjoy a relaxing vacation in the heart of Kyoto, Japan. Perfect for your next getaway.",
+    "image": {
+      "filename": "listingimage",
+      "url": "https://images.pexels.com/photos/1450363/pexels-photo-1450363.jpeg?auto=compress&cs=tinysrgb&w=800"
     },
-    price: 1200,
-    location: "New York City",
-    country: "United States",
+    "price": 700,
+    "location": "Kyoto",
+    "country": "Japan",
+    "category": "rooms"
   },
   {
-    title: "Mountain Retreat",
-    description:
-      "Unplug and unwind in this peaceful mountain cabin. Surrounded by nature, it's a perfect place to recharge.",
-    image: {
-      filename: "listingimage",
-      url: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8aG90ZWxzfGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60",
+    "title": "Beautiful Stay in Queenstown",
+    "description": "Enjoy a relaxing vacation in the heart of Queenstown, New Zealand. Perfect for your next getaway.",
+    "image": {
+      "filename": "listingimage",
+      "url": "https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg?auto=compress&cs=tinysrgb&w=800"
     },
-    price: 1000,
-    location: "Aspen",
-    country: "United States",
+    "price": 800,
+    "location": "Queenstown",
+    "country": "New Zealand",
+    "category": "iconic cities"
   },
   {
-    title: "Historic Villa in Tuscany",
-    description:
-      "Experience the charm of Tuscany in this beautifully restored villa. Explore the rolling hills and vineyards.",
-    image: {
-      filename: "listingimage",
-      url: "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8aG90ZWxzfGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60",
+    "title": "Beautiful Stay in Banff",
+    "description": "Enjoy a relaxing vacation in the heart of Banff, Canada. Perfect for your next getaway.",
+    "image": {
+      "filename": "listingimage",
+      "url": "https://images.pexels.com/photos/325185/pexels-photo-325185.jpeg?auto=compress&cs=tinysrgb&w=800"
     },
-    price: 2500,
-    location: "Florence",
-    country: "Italy",
+    "price": 900,
+    "location": "Banff",
+    "country": "Canada",
+    "category": "mountains"
   },
   {
-    title: "Secluded Treehouse Getaway",
-    description:
-      "Live among the treetops in this unique treehouse retreat. A true nature lover's paradise.",
-    image: {
-      filename: "listingimage",
-      url: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fGhvdGVsc3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60",
+    "title": "Beautiful Stay in Paris",
+    "description": "Enjoy a relaxing vacation in the heart of Paris, France. Perfect for your next getaway.",
+    "image": {
+      "filename": "listingimage",
+      "url": "https://images.pexels.com/photos/210488/pexels-photo-210488.jpeg?auto=compress&cs=tinysrgb&w=800"
     },
-    price: 800,
-    location: "Portland",
-    country: "United States",
+    "price": 1000,
+    "location": "Paris",
+    "country": "France",
+    "category": "castles"
   },
   {
-    title: "Beachfront Paradise",
-    description:
-      "Step out of your door onto the sandy beach. This beachfront condo offers the ultimate relaxation.",
-    image: {
-      filename: "listingimage",
-      url: "https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGhvdGVsc3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60",
+    "title": "Beautiful Stay in Barcelona",
+    "description": "Enjoy a relaxing vacation in the heart of Barcelona, Spain. Perfect for your next getaway.",
+    "image": {
+      "filename": "listingimage",
+      "url": "https://images.pexels.com/photos/953241/pexels-photo-953241.jpeg?auto=compress&cs=tinysrgb&w=800"
     },
-    price: 2000,
-    location: "Cancun",
-    country: "Mexico",
+    "price": 1100,
+    "location": "Barcelona",
+    "country": "Spain",
+    "category": "amazing pools"
   },
   {
-    title: "Rustic Cabin by the Lake",
-    description:
-      "Spend your days fishing and kayaking on the serene lake. This cozy cabin is perfect for outdoor enthusiasts.",
-    image: {
-      filename: "listingimage",
-      url: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fG1vdW50YWlufGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60",
+    "title": "Beautiful Stay in New York",
+    "description": "Enjoy a relaxing vacation in the heart of New York, USA. Perfect for your next getaway.",
+    "image": {
+      "filename": "listingimage",
+      "url": "https://images.pexels.com/photos/259588/pexels-photo-259588.jpeg?auto=compress&cs=tinysrgb&w=800"
     },
-    price: 900,
-    location: "Lake Tahoe",
-    country: "United States",
+    "price": 1200,
+    "location": "New York",
+    "country": "USA",
+    "category": "camping"
   },
   {
-    title: "Luxury Penthouse with City Views",
-    description:
-      "Indulge in luxury living with panoramic city views from this stunning penthouse apartment.",
-    image: {
-      filename: "listingimage",
-      url: "https://images.unsplash.com/photo-1622396481328-9b1b78cdd9fd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8c2t5JTIwdmFjYXRpb258ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=800&q=60",
+    "title": "Beautiful Stay in Marrakech",
+    "description": "Enjoy a relaxing vacation in the heart of Marrakech, Morocco. Perfect for your next getaway.",
+    "image": {
+      "filename": "listingimage",
+      "url": "https://images.pexels.com/photos/1115804/pexels-photo-1115804.jpeg?auto=compress&cs=tinysrgb&w=800"
     },
-    price: 3500,
-    location: "Los Angeles",
-    country: "United States",
+    "price": 1300,
+    "location": "Marrakech",
+    "country": "Morocco",
+    "category": "farms"
   },
   {
-    title: "Ski-In/Ski-Out Chalet",
-    description:
-      "Hit the slopes right from your doorstep in this ski-in/ski-out chalet in the Swiss Alps.",
-    image: {
-      filename: "listingimage",
-      url: "https://images.unsplash.com/photo-1502784444187-359ac186c5bb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fHNreSUyMHZhY2F0aW9ufGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60",
+    "title": "Beautiful Stay in Reykjavik",
+    "description": "Enjoy a relaxing vacation in the heart of Reykjavik, Iceland. Perfect for your next getaway.",
+    "image": {
+      "filename": "listingimage",
+      "url": "https://images.pexels.com/photos/1841552/pexels-photo-1841552.jpeg?auto=compress&cs=tinysrgb&w=800"
     },
-    price: 3000,
-    location: "Verbier",
-    country: "Switzerland",
+    "price": 1400,
+    "location": "Reykjavik",
+    "country": "Iceland",
+    "category": "arctic"
   },
   {
-    title: "Safari Lodge in the Serengeti",
-    description:
-      "Experience the thrill of the wild in a comfortable safari lodge. Witness the Great Migration up close.",
-    image: {
-      filename: "listingimage",
-      url: "https://images.unsplash.com/photo-1493246507139-91e8fad9978e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjl8fG1vdW50YWlufGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60",
+    "title": "Beautiful Stay in Bali",
+    "description": "Enjoy a relaxing vacation in the heart of Bali, Indonesia. Perfect for your next getaway.",
+    "image": {
+      "filename": "listingimage",
+      "url": "https://images.pexels.com/photos/417344/pexels-photo-417344.jpeg?auto=compress&cs=tinysrgb&w=800"
     },
-    price: 4000,
-    location: "Serengeti National Park",
-    country: "Tanzania",
+    "price": 1500,
+    "location": "Bali",
+    "country": "Indonesia",
+    "category": "trending"
   },
   {
-    title: "Historic Canal House",
-    description:
-      "Stay in a piece of history in this beautifully preserved canal house in Amsterdam's iconic district.",
-    image: {
-      filename: "listingimage",
-      url: "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Y2FtcGluZ3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60",
+    "title": "Beautiful Stay in Cappadocia",
+    "description": "Enjoy a relaxing vacation in the heart of Cappadocia, Turkey. Perfect for your next getaway.",
+    "image": {
+      "filename": "listingimage",
+      "url": "https://images.pexels.com/photos/3889704/pexels-photo-3889704.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
     },
-    price: 1800,
-    location: "Amsterdam",
-    country: "Netherlands",
+    "price": 600,
+    "location": "Cappadocia",
+    "country": "Turkey",
+    "category": "rooms"
   },
   {
-    title: "Private Island Retreat",
-    description:
-      "Have an entire island to yourself for a truly exclusive and unforgettable vacation experience.",
-    image: {
-      filename: "listingimage",
-      url: "https://images.unsplash.com/photo-1618140052121-39fc6db33972?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8bG9kZ2V8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=800&q=60",
+    "title": "Beautiful Stay in Rome",
+    "description": "Enjoy a relaxing vacation in the heart of Rome, Italy. Perfect for your next getaway.",
+    "image": {
+      "filename": "listingimage",
+      "url": "https://images.pexels.com/photos/1450363/pexels-photo-1450363.jpeg?auto=compress&cs=tinysrgb&w=800"
     },
-    price: 10000,
-    location: "Fiji",
-    country: "Fiji",
+    "price": 700,
+    "location": "Rome",
+    "country": "Italy",
+    "category": "iconic cities"
   },
   {
-    title: "Charming Cottage in the Cotswolds",
-    description:
-      "Escape to the picturesque Cotswolds in this quaint and charming cottage with a thatched roof.",
-    image: {
-      filename: "listingimage",
-      url: "https://images.unsplash.com/photo-1602088113235-229c19758e9f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8YmVhY2glMjB2YWNhdGlvbnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60",
+    "title": "Beautiful Stay in Prague",
+    "description": "Enjoy a relaxing vacation in the heart of Prague, Czech Republic. Perfect for your next getaway.",
+    "image": {
+      "filename": "listingimage",
+      "url": "https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg?auto=compress&cs=tinysrgb&w=800"
     },
-    price: 1200,
-    location: "Cotswolds",
-    country: "United Kingdom",
+    "price": 800,
+    "location": "Prague",
+    "country": "Czech Republic",
+    "category": "mountains"
   },
   {
-    title: "Historic Brownstone in Boston",
-    description:
-      "Step back in time in this elegant historic brownstone located in the heart of Boston.",
-    image: {
-      filename: "listingimage",
-      url: "https://images.unsplash.com/photo-1533619239233-6280475a633a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fHNreSUyMHZhY2F0aW9ufGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60",
+    "title": "Beautiful Stay in Sydney",
+    "description": "Enjoy a relaxing vacation in the heart of Sydney, Australia. Perfect for your next getaway.",
+    "image": {
+      "filename": "listingimage",
+      "url": "https://images.pexels.com/photos/325185/pexels-photo-325185.jpeg?auto=compress&cs=tinysrgb&w=800"
     },
-    price: 2200,
-    location: "Boston",
-    country: "United States",
+    "price": 900,
+    "location": "Sydney",
+    "country": "Australia",
+    "category": "castles"
   },
   {
-    title: "Beachfront Bungalow in Bali",
-    description:
-      "Relax on the sandy shores of Bali in this beautiful beachfront bungalow with a private pool.",
-    image: {
-      filename: "listingimage",
-      url: "https://images.unsplash.com/photo-1602391833977-358a52198938?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzJ8fGNhbXBpbmd8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=800&q=60",
+    "title": "Beautiful Stay in Amsterdam",
+    "description": "Enjoy a relaxing vacation in the heart of Amsterdam, Netherlands. Perfect for your next getaway.",
+    "image": {
+      "filename": "listingimage",
+      "url": "https://images.pexels.com/photos/210488/pexels-photo-210488.jpeg?auto=compress&cs=tinysrgb&w=800"
     },
-    price: 1800,
-    location: "Bali",
-    country: "Indonesia",
+    "price": 1000,
+    "location": "Amsterdam",
+    "country": "Netherlands",
+    "category": "amazing pools"
   },
   {
-    title: "Mountain View Cabin in Banff",
-    description:
-      "Enjoy breathtaking mountain views from this cozy cabin in the Canadian Rockies.",
-    image: {
-      filename: "listingimage",
-      url: "https://images.unsplash.com/photo-1521401830884-6c03c1c87ebb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGxvZGdlfGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60",
+    "title": "Beautiful Stay in Dubai",
+    "description": "Enjoy a relaxing vacation in the heart of Dubai, UAE. Perfect for your next getaway.",
+    "image": {
+      "filename": "listingimage",
+      "url": "https://images.pexels.com/photos/953241/pexels-photo-953241.jpeg?auto=compress&cs=tinysrgb&w=800"
     },
-    price: 1500,
-    location: "Banff",
-    country: "Canada",
+    "price": 1100,
+    "location": "Dubai",
+    "country": "UAE",
+    "category": "camping"
   },
   {
-    title: "Art Deco Apartment in Miami",
-    description:
-      "Step into the glamour of the 1920s in this stylish Art Deco apartment in South Beach.",
-    image: {
-      filename: "listingimage",
-      url: "https://plus.unsplash.com/premium_photo-1670963964797-942df1804579?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGxvZGdlfGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60",
+    "title": "Beautiful Stay in Zurich",
+    "description": "Enjoy a relaxing vacation in the heart of Zurich, Switzerland. Perfect for your next getaway.",
+    "image": {
+      "filename": "listingimage",
+      "url": "https://images.pexels.com/photos/259588/pexels-photo-259588.jpeg?auto=compress&cs=tinysrgb&w=800"
     },
-    price: 1600,
-    location: "Miami",
-    country: "United States",
+    "price": 1200,
+    "location": "Zurich",
+    "country": "Switzerland",
+    "category": "farms"
   },
   {
-    title: "Tropical Villa in Phuket",
-    description:
-      "Escape to a tropical paradise in this luxurious villa with a private infinity pool in Phuket.",
-    image: {
-      filename: "listingimage",
-      url: "https://images.unsplash.com/photo-1470165301023-58dab8118cc9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGxvZGdlfGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60",
+    "title": "Beautiful Stay in Cape Town",
+    "description": "Enjoy a relaxing vacation in the heart of Cape Town, South Africa. Perfect for your next getaway.",
+    "image": {
+      "filename": "listingimage",
+      "url": "https://images.pexels.com/photos/1115804/pexels-photo-1115804.jpeg?auto=compress&cs=tinysrgb&w=800"
     },
-    price: 3000,
-    location: "Phuket",
-    country: "Thailand",
+    "price": 1300,
+    "location": "Cape Town",
+    "country": "South Africa",
+    "category": "arctic"
   },
   {
-    title: "Historic Castle in Scotland",
-    description:
-      "Live like royalty in this historic castle in the Scottish Highlands. Explore the rugged beauty of the area.",
-    image: {
-      filename: "listingimage",
-      url: "https://images.unsplash.com/photo-1585543805890-6051f7829f98?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGJlYWNoJTIwdmFjYXRpb258ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=800&q=60",
+    "title": "Beautiful Stay in Petra",
+    "description": "Enjoy a relaxing vacation in the heart of Petra, Jordan. Perfect for your next getaway.",
+    "image": {
+      "filename": "listingimage",
+      "url": "https://images.pexels.com/photos/1841552/pexels-photo-1841552.jpeg?auto=compress&cs=tinysrgb&w=800"
     },
-    price: 4000,
-    location: "Scottish Highlands",
-    country: "United Kingdom",
+    "price": 1400,
+    "location": "Petra",
+    "country": "Jordan",
+    "category": "trending"
   },
   {
-    title: "Desert Oasis in Dubai",
-    description:
-      "Experience luxury in the middle of the desert in this opulent oasis in Dubai with a private pool.",
-    image: {
-      filename: "listingimage",
-      url: "https://images.unsplash.com/photo-1518684079-3c830dcef090?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZHViYWl8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=800&q=60",
+    "title": "Beautiful Stay in Cusco",
+    "description": "Enjoy a relaxing vacation in the heart of Cusco, Peru. Perfect for your next getaway.",
+    "image": {
+      "filename": "listingimage",
+      "url": "https://images.pexels.com/photos/417344/pexels-photo-417344.jpeg?auto=compress&cs=tinysrgb&w=800"
     },
-    price: 5000,
-    location: "Dubai",
-    country: "United Arab Emirates",
+    "price": 1500,
+    "location": "Cusco",
+    "country": "Peru",
+    "category": "rooms"
   },
   {
-    title: "Rustic Log Cabin in Montana",
-    description:
-      "Unplug and unwind in this cozy log cabin surrounded by the natural beauty of Montana.",
-    image: {
-      filename: "listingimage",
-      url: "https://images.unsplash.com/photo-1586375300773-8384e3e4916f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fGxvZGdlfGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60",
+    "title": "Beautiful Stay in Kathmandu",
+    "description": "Enjoy a relaxing vacation in the heart of Kathmandu, Nepal. Perfect for your next getaway.",
+    "image": {
+      "filename": "listingimage",
+      "url": "https://images.pexels.com/photos/18647876/pexels-photo-18647876/free-photo-of-aerial-view-of-houses-in-a-mountain-village-of-ghandruk-in-nepal.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
     },
-    price: 1100,
-    location: "Montana",
-    country: "United States",
+    "price": 600,
+    "location": "Kathmandu",
+    "country": "Nepal",
+    "category": "iconic cities"
   },
   {
-    title: "Beachfront Villa in Greece",
-    description:
-      "Enjoy the crystal-clear waters of the Mediterranean in this beautiful beachfront villa on a Greek island.",
-    image: {
-      filename: "listingimage",
-      url: "https://images.unsplash.com/photo-1602343168117-bb8ffe3e2e9f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8dmlsbGF8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=800&q=60",
+    "title": "Beautiful Stay in Hanoi",
+    "description": "Enjoy a relaxing vacation in the heart of Hanoi, Vietnam. Perfect for your next getaway.",
+    "image": {
+      "filename": "listingimage",
+      "url": "https://images.pexels.com/photos/6027405/pexels-photo-6027405.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
     },
-    price: 2500,
-    location: "Mykonos",
-    country: "Greece",
+    "price": 700,
+    "location": "Hanoi",
+    "country": "Vietnam",
+    "category": "mountains"
   },
   {
-    title: "Eco-Friendly Treehouse Retreat",
-    description:
-      "Stay in an eco-friendly treehouse nestled in the forest. It's the perfect escape for nature lovers.",
-    image: {
-      filename: "listingimage",
-      url: "https://images.unsplash.com/photo-1488462237308-ecaa28b729d7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8c2t5JTIwdmFjYXRpb258ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=800&q=60",
+    "title": "Beautiful Stay in Seoul",
+    "description": "Enjoy a relaxing vacation in the heart of Seoul, South Korea. Perfect for your next getaway.",
+    "image": {
+      "filename": "listingimage",
+      "url": "https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg?auto=compress&cs=tinysrgb&w=800"
     },
-    price: 750,
-    location: "Costa Rica",
-    country: "Costa Rica",
+    "price": 800,
+    "location": "Seoul",
+    "country": "South Korea",
+    "category": "castles"
   },
   {
-    title: "Historic Cottage in Charleston",
-    description:
-      "Experience the charm of historic Charleston in this beautifully restored cottage with a private garden.",
-    image: {
-      filename: "listingimage",
-      url: "https://images.unsplash.com/photo-1587381420270-3e1a5b9e6904?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGxvZGdlfGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60",
+    "title": "Beautiful Stay in Vienna",
+    "description": "Enjoy a relaxing vacation in the heart of Vienna, Austria. Perfect for your next getaway.",
+    "image": {
+      "filename": "listingimage",
+      "url": "https://images.pexels.com/photos/325185/pexels-photo-325185.jpeg?auto=compress&cs=tinysrgb&w=800"
     },
-    price: 1600,
-    location: "Charleston",
-    country: "United States",
+    "price": 900,
+    "location": "Vienna",
+    "country": "Austria",
+    "category": "amazing pools"
   },
   {
-    title: "Modern Apartment in Tokyo",
-    description:
-      "Explore the vibrant city of Tokyo from this modern and centrally located apartment.",
-    image: {
-      filename: "listingimage",
-      url: "https://images.unsplash.com/photo-1480796927426-f609979314bd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fHRva3lvfGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60",
+    "title": "Beautiful Stay in Helsinki",
+    "description": "Enjoy a relaxing vacation in the heart of Helsinki, Finland. Perfect for your next getaway.",
+    "image": {
+      "filename": "listingimage",
+      "url": "https://images.pexels.com/photos/210488/pexels-photo-210488.jpeg?auto=compress&cs=tinysrgb&w=800"
     },
-    price: 2000,
-    location: "Tokyo",
-    country: "Japan",
+    "price": 1000,
+    "location": "Helsinki",
+    "country": "Finland",
+    "category": "camping"
   },
   {
-    title: "Lakefront Cabin in New Hampshire",
-    description:
-      "Spend your days by the lake in this cozy cabin in the scenic White Mountains of New Hampshire.",
-    image: {
-      filename: "listingimage",
-      url: "https://images.unsplash.com/photo-1578645510447-e20b4311e3ce?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDF8fGNhbXBpbmd8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=800&q=60",
+    "title": "Beautiful Stay in Bangkok",
+    "description": "Enjoy a relaxing vacation in the heart of Bangkok, Thailand. Perfect for your next getaway.",
+    "image": {
+      "filename": "listingimage",
+      "url": "https://images.pexels.com/photos/953241/pexels-photo-953241.jpeg?auto=compress&cs=tinysrgb&w=800"
     },
-    price: 1200,
-    location: "New Hampshire",
-    country: "United States",
+    "price": 1100,
+    "location": "Bangkok",
+    "country": "Thailand",
+    "category": "farms"
   },
   {
-    title: "Luxury Villa in the Maldives",
-    description:
-      "Indulge in luxury in this overwater villa in the Maldives with stunning views of the Indian Ocean.",
-    image: {
-      filename: "listingimage",
-      url: "https://images.unsplash.com/photo-1439066615861-d1af74d74000?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8bGFrZXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60",
+    "title": "Beautiful Stay in Istanbul",
+    "description": "Enjoy a relaxing vacation in the heart of Istanbul, Turkey. Perfect for your next getaway.",
+    "image": {
+      "filename": "listingimage",
+      "url": "https://images.pexels.com/photos/259588/pexels-photo-259588.jpeg?auto=compress&cs=tinysrgb&w=800"
     },
-    price: 6000,
-    location: "Maldives",
-    country: "Maldives",
+    "price": 1200,
+    "location": "Istanbul",
+    "country": "Turkey",
+    "category": "arctic"
   },
   {
-    title: "Ski Chalet in Aspen",
-    description:
-      "Hit the slopes in style with this luxurious ski chalet in the world-famous Aspen ski resort.",
-    image: {
-      filename: "listingimage",
-      url: "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fGxha2V8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=800&q=60",
+    "title": "Beautiful Stay in Berlin",
+    "description": "Enjoy a relaxing vacation in the heart of Berlin, Germany. Perfect for your next getaway.",
+    "image": {
+      "filename": "listingimage",
+      "url": "https://images.pexels.com/photos/1115804/pexels-photo-1115804.jpeg?auto=compress&cs=tinysrgb&w=800"
     },
-    price: 4000,
-    location: "Aspen",
-    country: "United States",
+    "price": 1300,
+    "location": "Berlin",
+    "country": "Germany",
+    "category": "trending"
   },
   {
-    title: "Secluded Beach House in Costa Rica",
-    description:
-      "Escape to a secluded beach house on the Pacific coast of Costa Rica. Surf, relax, and unwind.",
-    image: {
-      filename: "listingimage",
-      url: "https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YmVhY2glMjBob3VzZXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60",
+    "title": "Beautiful Stay in Lisbon",
+    "description": "Enjoy a relaxing vacation in the heart of Lisbon, Portugal. Perfect for your next getaway.",
+    "image": {
+      "filename": "listingimage",
+      "url": "https://images.pexels.com/photos/1841552/pexels-photo-1841552.jpeg?auto=compress&cs=tinysrgb&w=800"
     },
-    price: 1800,
-    location: "Costa Rica",
-    country: "Costa Rica",
+    "price": 1400,
+    "location": "Lisbon",
+    "country": "Portugal",
+    "category": "rooms"
   },
+  {
+    "title": "Beautiful Stay in Edinburgh",
+    "description": "Enjoy a relaxing vacation in the heart of Edinburgh, Scotland. Perfect for your next getaway.",
+    "image": {
+      "filename": "listingimage",
+      "url": "https://images.pexels.com/photos/417344/pexels-photo-417344.jpeg?auto=compress&cs=tinysrgb&w=800"
+    },
+    "price": 1500,
+    "location": "Edinburgh",
+    "country": "Scotland",
+    "category": "iconic cities"
+  },
+  {
+    "title": "Beautiful Stay in Stockholm",
+    "description": "Enjoy a relaxing vacation in the heart of Stockholm, Sweden. Perfect for your next getaway.",
+    "image": {
+      "filename": "listingimage",
+      "url": "https://images.pexels.com/photos/39378/sunset-channel-water-evening-39378.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+    },
+    "price": 600,
+    "location": "Stockholm",
+    "country": "Sweden",
+    "category": "mountains"
+  },
+  {
+    "title": "Beautiful Stay in Oslo",
+    "description": "Enjoy a relaxing vacation in the heart of Oslo, Norway. Perfect for your next getaway.",
+    "image": {
+      "filename": "listingimage",
+      "url": "https://images.pexels.com/photos/1450363/pexels-photo-1450363.jpeg?auto=compress&cs=tinysrgb&w=800"
+    },
+    "price": 700,
+    "location": "Oslo",
+    "country": "Norway",
+    "category": "castles"
+  },
+  {
+    "title": "Beautiful Stay in Warsaw",
+    "description": "Enjoy a relaxing vacation in the heart of Warsaw, Poland. Perfect for your next getaway.",
+    "image": {
+      "filename": "listingimage",
+      "url": "https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg?auto=compress&cs=tinysrgb&w=800"
+    },
+    "price": 800,
+    "location": "Warsaw",
+    "country": "Poland",
+    "category": "amazing pools"
+  },
+  {
+    "title": "Beautiful Stay in Tallinn",
+    "description": "Enjoy a relaxing vacation in the heart of Tallinn, Estonia. Perfect for your next getaway.",
+    "image": {
+      "filename": "listingimage",
+      "url": "https://images.pexels.com/photos/325185/pexels-photo-325185.jpeg?auto=compress&cs=tinysrgb&w=800"
+    },
+    "price": 900,
+    "location": "Tallinn",
+    "country": "Estonia",
+    "category": "camping"
+  },
+  {
+    "title": "Beautiful Stay in Dublin",
+    "description": "Enjoy a relaxing vacation in the heart of Dublin, Ireland. Perfect for your next getaway.",
+    "image": {
+      "filename": "listingimage",
+      "url": "https://images.pexels.com/photos/210488/pexels-photo-210488.jpeg?auto=compress&cs=tinysrgb&w=800"
+    },
+    "price": 1000,
+    "location": "Dublin",
+    "country": "Ireland",
+    "category": "farms"
+  },
+  {
+    "title": "Beautiful Stay in Brussels",
+    "description": "Enjoy a relaxing vacation in the heart of Brussels, Belgium. Perfect for your next getaway.",
+    "image": {
+      "filename": "listingimage",
+      "url": "https://images.pexels.com/photos/953241/pexels-photo-953241.jpeg?auto=compress&cs=tinysrgb&w=800"
+    },
+    "price": 1100,
+    "location": "Brussels",
+    "country": "Belgium",
+    "category": "arctic"
+  },
+  {
+    "title": "Beautiful Stay in Ljubljana",
+    "description": "Enjoy a relaxing vacation in the heart of Ljubljana, Slovenia. Perfect for your next getaway.",
+    "image": {
+      "filename": "listingimage",
+      "url": "https://images.pexels.com/photos/259588/pexels-photo-259588.jpeg?auto=compress&cs=tinysrgb&w=800"
+    },
+    "price": 1200,
+    "location": "Ljubljana",
+    "country": "Slovenia",
+    "category": "trending"
+  },
+  {
+    "title": "Beautiful Stay in Valencia",
+    "description": "Enjoy a relaxing vacation in the heart of Valencia, Spain. Perfect for your next getaway.",
+    "image": {
+      "filename": "listingimage",
+      "url": "https://images.pexels.com/photos/1115804/pexels-photo-1115804.jpeg?auto=compress&cs=tinysrgb&w=800"
+    },
+    "price": 1300,
+    "location": "Valencia",
+    "country": "Spain",
+    "category": "rooms"
+  },
+  {
+    "title": "Beautiful Stay in Porto",
+    "description": "Enjoy a relaxing vacation in the heart of Porto, Portugal. Perfect for your next getaway.",
+    "image": {
+      "filename": "listingimage",
+      "url": "https://images.pexels.com/photos/1841552/pexels-photo-1841552.jpeg?auto=compress&cs=tinysrgb&w=800"
+    },
+    "price": 1400,
+    "location": "Porto",
+    "country": "Portugal",
+    "category": "iconic cities"
+  },
+  {
+    "title": "Beautiful Stay in Salzburg",
+    "description": "Enjoy a relaxing vacation in the heart of Salzburg, Austria. Perfect for your next getaway.",
+    "image": {
+      "filename": "listingimage",
+      "url": "https://images.pexels.com/photos/417344/pexels-photo-417344.jpeg?auto=compress&cs=tinysrgb&w=800"
+    },
+    "price": 1500,
+    "location": "Salzburg",
+    "country": "Austria",
+    "category": "mountains"
+  },
+  {
+    "title": "Beautiful Stay in Lucerne",
+    "description": "Enjoy a relaxing vacation in the heart of Lucerne, Switzerland. Perfect for your next getaway.",
+    "image": {
+      "filename": "listingimage",
+      "url": "https://images.pexels.com/photos/2710052/pexels-photo-2710052.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+    },
+    "price": 600,
+    "location": "Lucerne",
+    "country": "Switzerland",
+    "category": "castles"
+  },
+  {
+    "title": "Beautiful Stay in Santorini",
+    "description": "Enjoy a relaxing vacation in the heart of Santorini, Greece. Perfect for your next getaway.",
+    "image": {
+      "filename": "listingimage",
+      "url": "https://images.pexels.com/photos/1450363/pexels-photo-1450363.jpeg?auto=compress&cs=tinysrgb&w=800"
+    },
+    "price": 700,
+    "location": "Santorini",
+    "country": "Greece",
+    "category": "amazing pools"
+  },
+  {
+    "title": "Beautiful Stay in Kyoto",
+    "description": "Enjoy a relaxing vacation in the heart of Kyoto, Japan. Perfect for your next getaway.",
+    "image": {
+      "filename": "listingimage",
+      "url": "https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg?auto=compress&cs=tinysrgb&w=800"
+    },
+    "price": 800,
+    "location": "Kyoto",
+    "country": "Japan",
+    "category": "camping"
+  },
+  {
+    "title": "Beautiful Stay in Queenstown",
+    "description": "Enjoy a relaxing vacation in the heart of Queenstown, New Zealand. Perfect for your next getaway.",
+    "image": {
+      "filename": "listingimage",
+      "url": "https://images.pexels.com/photos/325185/pexels-photo-325185.jpeg?auto=compress&cs=tinysrgb&w=800"
+    },
+    "price": 900,
+    "location": "Queenstown",
+    "country": "New Zealand",
+    "category": "farms"
+  },
+  {
+    "title": "Beautiful Stay in Banff",
+    "description": "Enjoy a relaxing vacation in the heart of Banff, Canada. Perfect for your next getaway.",
+    "image": {
+      "filename": "listingimage",
+      "url": "https://images.pexels.com/photos/210488/pexels-photo-210488.jpeg?auto=compress&cs=tinysrgb&w=800"
+    },
+    "price": 1000,
+    "location": "Banff",
+    "country": "Canada",
+    "category": "arctic"
+  },
+  {
+    "title": "Beautiful Stay in Paris",
+    "description": "Enjoy a relaxing vacation in the heart of Paris, France. Perfect for your next getaway.",
+    "image": {
+      "filename": "listingimage",
+      "url": "https://images.pexels.com/photos/953241/pexels-photo-953241.jpeg?auto=compress&cs=tinysrgb&w=800"
+    },
+    "price": 1100,
+    "location": "Paris",
+    "country": "France",
+    "category": "trending"
+  },
+  {
+    "title": "Beautiful Stay in Barcelona",
+    "description": "Enjoy a relaxing vacation in the heart of Barcelona, Spain. Perfect for your next getaway.",
+    "image": {
+      "filename": "listingimage",
+      "url": "https://images.pexels.com/photos/259588/pexels-photo-259588.jpeg?auto=compress&cs=tinysrgb&w=800"
+    },
+    "price": 1200,
+    "location": "Barcelona",
+    "country": "Spain",
+    "category": "rooms"
+  },
+  {
+    "title": "Beautiful Stay in New York",
+    "description": "Enjoy a relaxing vacation in the heart of New York, USA. Perfect for your next getaway.",
+    "image": {
+      "filename": "listingimage",
+      "url": "https://images.pexels.com/photos/1115804/pexels-photo-1115804.jpeg?auto=compress&cs=tinysrgb&w=800"
+    },
+    "price": 1300,
+    "location": "New York",
+    "country": "USA",
+    "category": "iconic cities"
+  },
+  {
+    "title": "Beautiful Stay in Marrakech",
+    "description": "Enjoy a relaxing vacation in the heart of Marrakech, Morocco. Perfect for your next getaway.",
+    "image": {
+      "filename": "listingimage",
+      "url": "https://images.pexels.com/photos/1841552/pexels-photo-1841552.jpeg?auto=compress&cs=tinysrgb&w=800"
+    },
+    "price": 1400,
+    "location": "Marrakech",
+    "country": "Morocco",
+    "category": "mountains"
+  },
+  {
+    "title": "Beautiful Stay in Reykjavik",
+    "description": "Enjoy a relaxing vacation in the heart of Reykjavik, Iceland. Perfect for your next getaway.",
+    "image": {
+      "filename": "listingimage",
+      "url": "https://images.pexels.com/photos/417344/pexels-photo-417344.jpeg?auto=compress&cs=tinysrgb&w=800"
+    },
+    "price": 1500,
+    "location": "Reykjavik",
+    "country": "Iceland",
+    "category": "castles"
+  },
+  {
+    "title": "Beautiful Stay in Goa",
+    "description": "Enjoy a relaxing vacation in the heart of Goa, India. Perfect for your next beachside getaway.",
+    "image": {
+      "filename": "listingimage",
+      "url": "https://images.pexels.com/photos/753626/pexels-photo-753626.jpeg?auto=compress&cs=tinysrgb&w=800"
+    },
+    "price": 1200,
+    "location": "Goa",
+    "country": "India",
+    "category": "amazing pools"
+  },
+  {
+    "title": "Beautiful Stay in Manali",
+    "description": "Enjoy a relaxing vacation in the heart of Manali, India. Perfect for your next mountain retreat.",
+    "image": {
+      "filename": "listingimage",
+      "url": "https://images.pexels.com/photos/1666024/pexels-photo-1666024.jpeg?auto=compress&cs=tinysrgb&w=800"
+    },
+    "price": 900,
+    "location": "Manali",
+    "country": "India",
+    "category": "mountains"
+  },
+  {
+    "title": "Beautiful Stay in Udaipur",
+    "description": "Enjoy a relaxing vacation in the heart of Udaipur, India. Perfect for your next royal experience.",
+    "image": {
+      "filename": "listingimage",
+      "url": "https://images.pexels.com/photos/15534234/pexels-photo-15534234/free-photo-of-chair-on-balcony-with-sea-view.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+    },
+    "price": 1000,
+    "location": "Udaipur",
+    "country": "India",
+    "category": "castles"
+  },
+
 ];
 
 module.exports = { data: sampleListings };

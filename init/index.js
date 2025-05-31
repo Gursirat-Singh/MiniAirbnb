@@ -1,26 +1,50 @@
-const mongoose = require("mongoose");
-const initData = require("./data.js")
+const mongoose = require('mongoose');
+const initData = require("./data.js");
 const Listing = require("../Models/listing.js");
+const User = require("../Models/user.js");
 
-//Database Connection
-
-const mongo_url = "mongodb://127.0.0.1:27017/sirastay";
-async function main() {
-    await mongoose.connect(mongo_url);
-};
-main().then((res) => {
-    console.log("Database Connection Successful");
-}).catch((err) => {
-    console.log("Error Occured, Plz Check the issue")
-});
-
-//Data Initialization
+// MongoDB connection URL
+const MONGO_URL = "mongodb://127.0.0.1:27017/sirastay";
 
 const initDB = async () => {
-    await Listing.deleteMany({});
-    initData.data = initData.data.map((obj) => ({ ...obj, owner: "683626e0b72e31e0606cb468" }))
-    await Listing.insertMany(initData.data);
-    console.log("Data Initialized");
+    try {
+        await Listing.deleteMany({});
+        
+        // Use the existing user ID
+        const ownerId = "6836115d4c477849400b38ba";
+        
+        // Verify the user exists
+        const existingUser = await User.findById(ownerId);
+        if (!existingUser) {
+            throw new Error("Specified user ID does not exist in the database");
+        }
+        
+        console.log("Using owner ID:", ownerId);
+
+        // Map owner ID to each listing
+        const listingsWithOwner = initData.data.map((obj) => ({
+            ...obj,
+            owner: ownerId
+        }));
+
+        const insertedListings = await Listing.insertMany(listingsWithOwner);
+        console.log(`Successfully inserted ${insertedListings.length} listings`);
+        
+        await mongoose.connection.close();
+        console.log("Database connection closed");
+    } catch (err) {
+        console.error("Data Initialization Error:", err);
+        process.exit(1);
+    }
 };
 
-initDB();
+// Connect and run initialization
+mongoose.connect(MONGO_URL)
+    .then(() => {
+        console.log("Database Connected!");
+        return initDB();
+    })
+    .catch((err) => {
+        console.error("MongoDB Connection Error:", err);
+        process.exit(1);
+    });
