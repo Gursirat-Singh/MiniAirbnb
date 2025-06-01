@@ -1,4 +1,7 @@
 {
+  "engines": {
+    "node": "22.14.0"
+  },
   "name": "project-1",
   "version": "1.0.0",
   "main": "index.js",
@@ -6,12 +9,13 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "Gursirat-Singh",
   "license": "ISC",
   "description": "",
   "dependencies": {
     "cloudinary": "^1.21.0",
     "connect-flash": "^0.1.1",
+    "connect-mongo": "^5.1.0",
     "dotenv": "^16.5.0",
     "ejs": "^3.1.10",
     "ejs-mate": "^4.0.0",

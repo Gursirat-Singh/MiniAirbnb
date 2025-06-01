@@ -1,4 +1,4 @@
-if(process.env.NODE_ENV != "production"){
+if (process.env.NODE_ENV != "production") {
   require('dotenv').config();
 }
 const express = require("express");
@@ -13,10 +13,12 @@ const listingRoute = require("./routes/listingroute.js");
 const reviewRoute = require("./routes/reviewRoute.js");
 const userRoute = require("./routes/userroute.js");
 const session = require("express-session");
+const MongoStore = require('connect-mongo');
 const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./Models/user.js");
+const { error } = require('console');
 
 
 app.set("view engine", "ejs");
@@ -27,14 +29,24 @@ app.use(methodOverride("_method"));
 app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));
 
+
 // Database Connection
-const mongo_url = "mongodb://127.0.0.1:27017/sirastay";
-async function main() {
-  await mongoose.connect(mongo_url);
+const dbUrl = process.env.MONGO_ATLAS;
+
+if (!dbUrl) {
+  console.error("MongoDB connection string is missing!");
+  process.exit(1);
 }
-main()
-  .then(() => console.log("Database Connection Successful"))
-  .catch((err) => console.log("Error Occurred, Please Check the Issue"));
+
+mongoose.set('strictQuery', false);
+mongoose.connect(dbUrl)
+  .then(() => {
+    console.log("Database Connected Successfully");
+  })
+  .catch((err) => {
+    console.error("MongoDB Connection Error:", err.message);
+    process.exit(1);
+  });
 
 
 // Server Start
@@ -42,24 +54,23 @@ app.listen(8080, () => {
   console.log("Server Started");
 });
 
-// Test Route
-app.get("/testListing", async (req, res) => {
-  const sampleListing = new Listing({
-    title: "My new Villa",
-    description: "By the beach",
-    image: "",
-    price: 15000,
-    location: "calangute, Goa",
-    country: "India",
-  });
-  await sampleListing.save();
-  console.log("Sample Saved");
-  res.send("Test Successful");
+
+const store = MongoStore.create({
+  mongoUrl: dbUrl,
+  crypto: {
+    secret: process.env.SECRET,
+  },
+  touchAfter: 24 * 3600,
+});
+
+store.on("error", () => {
+  console.log("Error!!", error);
 });
 
 //Sessions
 const sessionOptions = {
-  secret: "BasicSecret",
+  store,
+  secret: process.env.SECRET,
   resave: false,
   saveUninitialized: true,
   cookie: {
@@ -69,10 +80,7 @@ const sessionOptions = {
   },
 };
 
-// // Root Route
-// app.get("/", (req, res) => {
-//   res.send("Welcome to My StaySira");
-// });
+
 
 
 app.use(session(sessionOptions));
