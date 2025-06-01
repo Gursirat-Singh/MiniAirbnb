@@ -1,19 +1,24 @@
-<nav class="navbar navbar-expand-md bg-white sticky-top py-3">
+<nav class="navbar navbar-expand-lg bg-white sticky-top py-3">
   <div class="container-fluid">
     <a class="navbar-brand text-danger me-5" href="/listings">
       <i class="fa-brands fa-airbnb fs-3"></i>
       <span class="ms-1 fw-bold">SiraStay</span>
     </a>
     <button
-      class="navbar-toggler"
+      class="navbar-toggler custom-toggler border-0 shadow-none"
       type="button"
       data-bs-toggle="collapse"
       data-bs-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
     >
-      <span class="navbar-toggler-icon"></span>
+      <span class="toggler-icon top-bar"></span>
+      <span class="toggler-icon middle-bar"></span>
+      <span class="toggler-icon bottom-bar"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav flex-grow-1 justify-content-center order-md-1">
+      <div class="navbar-nav flex-grow-1 justify-content-center order-lg-1">
         <form
           class="search-form mx-3"
           role="search"
@@ -38,7 +43,7 @@
           </div>
         </form>
       </div>
-      <div class="navbar-nav order-md-2 gap-2">
+      <div class="navbar-nav order-lg-2 gap-2">
         <a
           class="nav-link rounded-pill px-3 py-2 nav-btn host-btn"
           href="/listings/new"
